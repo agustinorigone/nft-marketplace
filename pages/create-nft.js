@@ -1,10 +1,24 @@
 import { useState } from 'react'
 import { ethers } from 'ethers'
-import { create as ipfsHttpClient } from 'ipfs-http-client'
+import { create } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
+
+const projectId = process.env.NEXT_PUBLIC_INFURA_IPFS_PROJECT_ID
+const projectSecret = process.env.NEXT_PUBLIC_INFURA_IPFS_PROJECT_SECRET
+const projectIdAndSecret = `${projectId}:${projectSecret}`
+
+const client = create({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https',
+  headers: {
+    authorization: `Basic ${Buffer.from(projectIdAndSecret).toString(
+      'base64'
+    )}`,
+  },
+})
 
 import {
   marketplaceAddress
@@ -26,7 +40,8 @@ export default function CreateItem() {
           progress: (prog) => console.log(`received: ${prog}`)
         }
       )
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      console.log(added);
+      const url = `https://infura-ipfs.io/ipfs/${added.path}`
       setFileUrl(url)
     } catch (error) {
       console.log('Error uploading file: ', error)
@@ -41,7 +56,8 @@ export default function CreateItem() {
     })
     try {
       const added = await client.add(data)
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      const url = `http://infura-ipfs.io/ipfs/${added.path}`
+      console.log(added);
       /* after file is uploaded to IPFS, return the URL to use it in the transaction */
       return url
     } catch (error) {

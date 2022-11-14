@@ -1,6 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
-const fs = require('fs');
-// const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
+require('dotenv').config();
+
+const { ALCHEMY_API_KEY, MAINNET_PRIVATE_KEY } = process.env;
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -8,14 +9,12 @@ module.exports = {
     hardhat: {
       chainId: 1337
     },
+    mainnet: {
+      url: `https://polygon-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+      accounts: [MAINNET_PRIVATE_KEY]
+    },
     /*
     mumbai: {
-      // Infura
-      // url: `https://polygon-mumbai.infura.io/v3/${infuraId}`
-      url: "https://rpc-mumbai.matic.today",
-      accounts: [process.env.privateKey]
-    },
-    matic: {
       // Infura
       // url: `https://polygon-mainnet.infura.io/v3/${infuraId}`,
       url: "https://rpc-mainnet.maticvigil.com",
