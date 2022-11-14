@@ -40,7 +40,6 @@ export default function CreateItem() {
           progress: (prog) => console.log(`received: ${prog}`)
         }
       )
-      console.log(added);
       const url = `https://infura-ipfs.io/ipfs/${added.path}`
       setFileUrl(url)
     } catch (error) {
@@ -56,8 +55,7 @@ export default function CreateItem() {
     })
     try {
       const added = await client.add(data)
-      const url = `http://infura-ipfs.io/ipfs/${added.path}`
-      console.log(added);
+      const url = `https://infura-ipfs.io/ipfs/${added.path}`
       /* after file is uploaded to IPFS, return the URL to use it in the transaction */
       return url
     } catch (error) {
