@@ -3,9 +3,7 @@
 https://github.com/dabit3/polygon-ethereum-nextjs-marketplace
 
 
-#### Local setup
-
-# install using NPM or Yarn
+## Local setup
 
 1. Install dependencies 
 ```sh
