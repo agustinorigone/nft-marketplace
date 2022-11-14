@@ -46,7 +46,7 @@ export default function ResellNFT() {
 
   return (
     <div className="flex justify-center">
-      <div className="w-1/2 flex flex-col pb-12">
+      <div className="md:w-1/2 flex flex-col pb-12">
         <input
           placeholder="Asset Price in Eth"
           className="mt-2 border rounded p-4"
